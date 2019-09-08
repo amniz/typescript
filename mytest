@@ -1,0 +1,129 @@
+var readline = require('readline-sync');
+
+
+interface PersonInterface{
+    firstName:string;
+    lastName:string;
+    address:string;
+    city:string; 
+    state:string;
+    zip:number;
+    phonenumber:number;
+}
+
+class Person implements PersonInterface{
+    firstName:string;
+    lastName:string;
+    address:string;
+    city:string; 
+    state:string;
+    zip:number;
+    phonenumber:number;
+
+    constructor(firstName:string,lastName:string,address:string,city:string,state:string,zip:number,phonenumber:number){
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.address=address;
+        this.city=city;
+        this.state=state;
+        this.zip=zip;
+        this.phonenumber=phonenumber;
+    }
+}
+
+class AddressBook {
+    person:any=[]
+    constructor(){
+    }
+    add(firstName:string,lastName:string,address:string,city:string,state:string,zip:number,phonenumber:number){
+       this.person.push(new Person(firstName,lastName,address,city,state,zip,phonenumber))
+
+    }
+    get(){ 
+        for (let per of this.person){
+            console.log(per)
+        }
+    }
+    edit(Name){
+        for (let i=0;i<this.person.length;i++){
+        if ((this.person[i].firstName)==Name){
+            var option = parseInt(readline.question("enter the option \n 1->address\n2->city"));
+            switch(option){
+                case 1:{
+                    this.person[i].address=readline.question("enter the new address");
+                    break;
+                }
+                case 2:
+                    {
+                    this.person[i].city=readline.question("enter the new city");
+                    break;
+               }
+               case 3:{
+                this.person[i].state=readline.question("enter the new state");
+                break;
+               }
+               case 4:{
+                this.person[i].zip=parseInt(readline.question("enter the new zip"));
+                break;
+               }
+               case 5:{
+                this.person[i].phonenumber=parseInt(readline.question("enter the new phonenumber"));
+                break;
+               }
+        default:{
+            console.log("please do enter any one of the above");
+            break;
+        }
+            }
+        break;
+        }
+        else{
+       
+        continue;
+        }
+    }
+    }
+
+    delete(Name){
+        for (let i=0;i<this.person.length;i++){
+            if ((this.person[i].firstName)==Name){
+                this.person.splice(i,1);
+                return;
+}}}
+
+display(){
+    var so=this.person.sort(function (a,b) {
+        if (a.lastname > b.lastname) {
+            console.log("a is greater");
+            return -1;
+        }
+        else if (b.lastname > a.lastname) {
+            console.log("b is greater");
+            return 1;
+        }
+        else{
+            if (a.firstName < b.firstName) {
+                console.log("a is greater");
+                return -1;
+        }
+        else{
+            return 1;
+
+        }
+    }
+    });
+    
+    console.log(so)
+
+}
+}
+
+var a=new AddressBook()
+a.add("nisam","ps","addresspolum","citypolum","statepolum",123,657574);
+a.add("asfds","ps","addresspolum","citypolum","statepolum",123,657574);
+a.display()
+// console.log(length(a))
+// // console.log(a.person[0])
+// // for (let i=0;i<2;i++){
+// //     console.log(a[i].firstName)
+// // }
